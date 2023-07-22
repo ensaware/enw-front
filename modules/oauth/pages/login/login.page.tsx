@@ -26,7 +26,7 @@ const Login = () => {
 
 				<h1>Ensaware</h1>
 
-				<div className="login">
+				<div className={styles.login}>
 					<IoLogInOutline />
 					<h2>Iniciar Sesión</h2>
 				</div>
