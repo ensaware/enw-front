@@ -3,6 +3,8 @@
 import { Roboto } from "next/font/google"
 import "./globals.css";
 
+import { AxiosInterceptor } from '@/commons/utils';
+
 
 const roboto = Roboto({
     weight: ["300", "400", "500", "700"],
@@ -12,7 +14,7 @@ const roboto = Roboto({
 	variable: '--font-roboto'
 });
 
-
+AxiosInterceptor();
 export default function RootLayout({
 	children,
 }: {
