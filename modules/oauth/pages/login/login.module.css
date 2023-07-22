@@ -22,6 +22,10 @@
 	@apply mr-2 text-xl;
 }
 
+.right div svg {
+	@apply mr-1;
+}
+
 .right img {
 	@apply mb-10;
 }
@@ -30,14 +34,10 @@
 	@apply text-5xl mb-10;
 }
 
-.right .login {
-	@apply flex flex-row mb-10 text-3xl text-gray-300 items-center;
-}
-
-.right div svg {
-	@apply mr-1;
-}
-
 .right p {
 	@apply mb-10;
+}
+
+.right .login {
+	@apply flex flex-row mb-10 text-3xl text-gray-300 items-center;
 }
