@@ -1,0 +1,7 @@
+.spinner {
+	@apply absolute bg-gray-900 bottom-0 flex items-center justify-center left-0 right-0 opacity-60 top-0 z-50;
+}
+
+.spinner span svg {
+	@apply h-52 w-52;
+}
