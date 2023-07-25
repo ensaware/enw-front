@@ -1,6 +1,7 @@
 FROM node:19.9.0
 
 RUN wget -qO- https://get.pnpm.io/install.sh | sh -
+COPY /tmp/tmp.BUL9h7c1zW/pnpm /root/.local/share/pnpm/pnpm
 
 ENV APP_HOME /app
 COPY . .
