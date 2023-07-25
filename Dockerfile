@@ -6,7 +6,7 @@ ENV NODE_ENV production
 
 RUN yarn global add pnpm
 COPY pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile -y
+RUN pnpm install --frozen-lockfile
 # COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
