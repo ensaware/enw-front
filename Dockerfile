@@ -1,16 +1,17 @@
 FROM node:19.9.0
 
-RUN npm install -g pnpm
+WORKDIR /app
 
-ENV APP_HOME /app
+ENV NODE_ENV production
+
+RUN yarn global add pnpm
+COPY pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile -y
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN pnpm install
 RUN pnpm next build
 
 EXPOSE 3000
 
-ENV PORT 3000
-ENV HOSTNAME localhost
-
-CMD ["pnpm", "next" "start"]
+CMD ["pnpm", "next", "start"]
