@@ -1,0 +1,31 @@
+.menu {
+	@apply mr-2 cursor-pointer md:hidden text-4xl;
+}
+
+.navbar {
+	@apply bg-primary text-gray-900;
+}
+
+.subnavbar {
+	@apply fixed h-full md:flex border-r-2 border-solid border-gray-800 z-50;
+}
+
+.subnavbar div {
+	@apply bg-gray-900;
+}
+
+.subnavbar a {
+	@apply text-gray-500 hover:bg-gray-700;
+}
+
+.subnavbar a svg {
+	@apply text-gray-500;
+}
+
+.subnavbar button {
+	@apply text-gray-500 hover:bg-gray-700;
+}
+
+.subnavbar button svg {
+	@apply text-gray-500;
+}
