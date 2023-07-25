@@ -2,10 +2,10 @@ import axios, { AxiosRequestConfig } from "axios";
 import { toast } from "sonner";
 
 import { IToken, IUser } from "@/commons/entities";
-import { userRefreshToken } from "@/commons/services";
 
 import { getToken, saveToken } from "./database";
 import { LocalStorageKeys, getLocalStorage } from "./local.storage";
+import { refreshToken } from "../services";
 
 export const AxiosInterceptor = () => {
     const updateHeader = async (request: AxiosRequestConfig) => {
@@ -20,9 +20,9 @@ export const AxiosInterceptor = () => {
           return request;
     }
 
-    const refreshToken = async () => {
+    const getRefreshToken = async () => {
         let user: IUser = getLocalStorage(LocalStorageKeys.AUTH);
-        const { data } : { data: IToken } = await userRefreshToken(user.provider);
+        const { data } : { data: IToken } = await refreshToken(user.provider);
         await saveToken(data);
     }
 
@@ -40,7 +40,7 @@ export const AxiosInterceptor = () => {
         async (error) => {
             const { data } = error.response;
             if (data.code === '401' && data.message.toLowerCase() === 'token expirado.') {
-                await refreshToken();
+                await getRefreshToken();
                 toast.success('Token actualizado. Por favor intenta nuevamente.');
                 return Promise.reject(error);
             }

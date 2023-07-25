@@ -1,5 +1,5 @@
 export enum LocalStorageKeys {
-    AUTH = "auth"
+    AUTH = "oauth"
 }
 
 export const clearLocalStorage = () => {
