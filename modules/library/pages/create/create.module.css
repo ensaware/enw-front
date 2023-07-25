@@ -1,0 +1,15 @@
+.form {
+	@apply flex flex-col gap-4;
+}
+
+.form div {
+	@apply mb-2 block;
+}
+
+.button {
+	@apply bg-secondary;
+}
+
+.buttonCapture {
+	@apply bg-primary;
+}
