@@ -16,6 +16,8 @@ const Login = () => {
 	const params = useSearchParams();
 	const loginHook = useLoginHook();
 
+	loginHook.useCheckLogin();
+
 	const token: string | null = params.get('token');
     const token_type: string | null = params.get('token_type');
     const refresh_token: string | null = params.get('refresh_token');
@@ -27,7 +29,7 @@ const Login = () => {
             refresh_token
         }
 
-        loginHook.onSaveToken(tokenData);
+        loginHook.useOnSaveToken(tokenData);
     }
 
 	return (

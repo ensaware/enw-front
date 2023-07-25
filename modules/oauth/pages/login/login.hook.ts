@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { OAuthFacade } from "../../oauth.facade";
 import { IToken } from "@/commons/entities";
 
@@ -19,17 +19,46 @@ const useLoginHook = () => {
 		setLoading(false);
 	}
 
-	const onSaveToken = async (token: IToken) => {
-		setLoading(true);
-		await facade.dispatchOnSaveToken(token);
-		setLoading(false);
+	const useOnSaveToken = (token: IToken) => {
+		useEffect(() => {
+			let isMounted = true;
+
+			setLoading(true);
+			facade.dispatchOnSaveToken(token);
+
+			if(isMounted) {
+				setLoading(false);
+			}
+
+			return () => {
+				isMounted = false;
+			};
+		}, [token]);
+	}
+
+	const useCheckLogin = () => {
+		useEffect(() => {
+			let isMounted = true;
+
+			setLoading(true);
+			facade.dispatchCheckLogin();
+
+			if(isMounted) {
+				setLoading(false);
+			}
+
+			return () => {
+				isMounted = false;
+			};
+		}, []);
 	}
 
 	return {
 		loading,
 		onAuthGoogle,
 		onLogout,
-		onSaveToken,
+		useCheckLogin,
+		useOnSaveToken,
 		showError: facade.showErrorState
 	}
 };
