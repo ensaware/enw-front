@@ -1,14 +1,15 @@
 FROM node:19.9.0
 
-WORKDIR /app
+RUN yarn global add pnpm
+
+ENV APP_HOME /app
+WORKDIR $APP_HOME
 
 ENV NODE_ENV production
 
-RUN yarn global add pnpm
-COPY pnpm-lock.yaml ./
+COPY . ./
+
 RUN pnpm install --frozen-lockfile
-# COPY --from=deps /app/node_modules ./node_modules
-COPY . .
 
 RUN pnpm next build
 
