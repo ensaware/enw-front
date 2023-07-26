@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Toaster } from 'sonner';
+
 import { EnwNavBar } from "@/commons/components/navbar/navbar";
 import { EnwSpinner } from "@/commons/components/spinner";
 import { IToken } from "@/commons/entities";
@@ -46,6 +48,7 @@ export default function EnwLayout({
 
 			{token &&
 				<>
+					<Toaster richColors />
 					<EnwNavBar />
 					<main className="md:ml-64 pl-5 pt-5 mr-4">
 						{children}
