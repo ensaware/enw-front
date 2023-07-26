@@ -8,47 +8,59 @@ import { LocalStorageKeys, getLocalStorage } from "./local.storage";
 import { refreshToken } from "../services";
 
 export const AxiosInterceptor = () => {
-    const updateHeader = async (request: AxiosRequestConfig) => {
-        const token: IToken | null = await getToken();
+	const updateHeader = async (request: AxiosRequestConfig) => {
+		const token: IToken | null = await getToken();
 
-        const newHeaders = {
-            Authorization: `${token?.token_type} ${token?.token}`,
-            'Content-Type': 'application/json'
-          };
+		const newHeaders = {
+			Authorization: `${token?.token_type} ${token?.token}`,
+		};
 
-          request.headers = newHeaders;
-          return request;
-    }
+		request.headers = newHeaders;
+		return request;
+	};
 
-    const getRefreshToken = async () => {
-        let user: IUser = getLocalStorage(LocalStorageKeys.AUTH);
-        const { data } : { data: IToken } = await refreshToken(user.provider);
-        await saveToken(data);
-    }
+	const getRefreshToken = async () => {
+		let user: IUser = getLocalStorage(LocalStorageKeys.AUTH);
+		const { data }: { data: IToken } = await refreshToken(user.provider);
+		await saveToken(data);
+	};
 
-    axios.interceptors.request.use((request: any) => {
-        if (request.url?.includes('authorization'))
-            return request;
+	axios.interceptors.request.use((request: any) => {
+		if (request.url?.includes("authorization")) return request;
 
-        return updateHeader(request);
-    });
+		return updateHeader(request);
+	});
 
-    axios.interceptors.response.use(
-        (response: any) => {
-            return response;
-        },
-        async (error) => {
-            const { data } = error.response;
-            if (data.code === '401' && data.message.toLowerCase() === 'token expirado.') {
-                await getRefreshToken();
-                toast.success('Token actualizado. Por favor intenta nuevamente.');
-                return Promise.reject(error);
-            }
+	axios.interceptors.response.use(
+		(response: any) => {
+			return response;
+		},
+		async (error) => {
+			const messageError = "Ha ocurrido un error, ¡por favor intenta nuevamente!";
 
-            let message: string = data.message ?? data.detail ?? 'Ha ocurrido un error, ¡por favor intenta nuevamente!';
-            toast.error(message);
+			if (error.response) {
+				const { data } = error.response;
+				if (
+					data.code === 401 &&
+					data.message.toLowerCase() === "token expirado."
+				) {
+					await getRefreshToken();
+					toast.success(
+						"Token actualizado. Por favor intenta nuevamente."
+					);
+					return Promise.reject(error);
+				}
 
-            return Promise.reject(error);
-        }
-    );
-}
+				let message: string =
+					data.message ??
+					messageError;
+
+				toast.error(message);
+			} else {
+				toast.error(messageError);
+			}
+
+			return Promise.reject(error);
+		}
+	);
+};
