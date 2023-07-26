@@ -1,3 +1,7 @@
+.card {
+	@apply md:w-9/12 md:mx-auto;
+}
+
 .form {
 	@apply flex flex-col gap-4;
 }

@@ -6,6 +6,7 @@ import { isMobile } from "react-device-detect";
 import styles from "./create.module.css";
 import Webcam from "react-webcam";
 import { useCreateHook } from "./create.hook";
+import { EnwSpinner } from "@/commons/components/spinner";
 
 const CreateLibrary = () => {
 	const createHook = useCreateHook();
@@ -16,8 +17,14 @@ const CreateLibrary = () => {
 
 	return (
 		<section>
-			<Card>
-				<form encType="multipart/form-data" className={styles.form}>
+			{createHook.createFormik.isSubmitting ?? console.log("enviando petición....")}
+
+			<Card className={styles.card}>
+				<form
+					className={styles.form}
+					autoComplete="off"
+					onSubmit={createHook.createFormik.handleSubmit}
+				>
 					{isMobile ? (
 						<>
 							<Webcam
@@ -40,8 +47,12 @@ const CreateLibrary = () => {
 							</div>
 
 							<FileInput
-								helperText="Por favor subir la foto del código de barra de libro en muy buena calidad."
+								accept='image/*'
+								color={createHook.createFormik.errors.image ? "failure" : ""}
 								id="file"
+								helperText={createHook.createFormik.errors.image ? createHook.createFormik.errors.image : "Por favor subir la foto del código de barra de libro en muy buena calidad."}
+								name="image"
+								onChange={createHook.onChangeImage}
 							/>
 						</div>
 					)}
