@@ -15,4 +15,4 @@ RUN pnpm next build
 
 EXPOSE 3000
 
-CMD ["pnpm", "next", "start"]
+CMD ["pnpm", "start"]
