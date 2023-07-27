@@ -1,17 +1,19 @@
 import { IUser } from ".";
 
 export interface ILibrary {
+	created: Date;
 	id: string;
 	isbn_10?: string | null;
 	isbn_13: string;
-	created: Date;
 	modified?: Date | null;
 	subtitle?: string | null;
 	title: string;
 }
 
 
-export interface IViewLibrary extends ILibrary {
+export interface IViewLibrary {
+	created: Date;
 	id: string;
-	user: IUser
+	library: ILibrary
+	user: IUser,
 }

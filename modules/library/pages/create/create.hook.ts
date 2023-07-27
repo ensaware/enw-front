@@ -17,6 +17,7 @@ const useCreateHook = () => {
 	const capture = useCallback(() => {
 		const imageSrc = webcamRef.current?.getScreenshot();
 		setImgCamara(imageSrc);
+		console.log(imageSrc);
 	}, [webcamRef, setImgCamara]);
 
 	const validateSchema = Yup.object().shape({
@@ -30,12 +31,14 @@ const useCreateHook = () => {
 	const createFormik = useFormik({
 		initialValues: initialValues,
 		validationSchema: validateSchema,
-		onSubmit: async () => {
+		onSubmit: async (values: ICreate, action) => {
 			const formData = new FormData();
 			formData.append("image", selectedImage ? selectedImage : "");
 
 			const { data }: { data : IViewLibrary } = await create(formData);
 			setLibrary(data);
+
+			action.resetForm();
 		},
 	});
 
@@ -52,6 +55,7 @@ const useCreateHook = () => {
 		imgCamara,
 		library,
 		onChangeImage,
+		webcamRef
 	};
 };
 

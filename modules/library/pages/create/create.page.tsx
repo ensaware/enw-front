@@ -1,12 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Button, Card, FileInput, Label } from "flowbite-react"
+import { Alert, Button, Card, FileInput, Label } from "flowbite-react"
 import { isMobile } from "react-device-detect";
+import { GiSpellBook } from "react-icons/gi";
+
 import styles from "./create.module.css";
 import Webcam from "react-webcam";
 import { useCreateHook } from "./create.hook";
+
 import { EnwSpinner } from "@/commons/components/spinner";
+import Image from "next/image";
 
 const CreateLibrary = () => {
 	const createHook = useCreateHook();
@@ -17,9 +20,15 @@ const CreateLibrary = () => {
 
 	return (
 		<section>
-			{createHook.createFormik.isSubmitting ?? console.log("enviando petición....")}
+			{createHook.createFormik.isSubmitting && <EnwSpinner />}
 
 			<Card className={styles.card}>
+				{createHook.library && (
+					<Alert color="success" icon={GiSpellBook}>
+						Se ha registrado correctamente el libro { createHook.library.library.title }.
+					</Alert>
+				)}
+
 				<form
 					className={styles.form}
 					autoComplete="off"
@@ -30,12 +39,22 @@ const CreateLibrary = () => {
 							<Webcam
 								audio={false}
 								screenshotFormat="image/png"
+								ref={createHook.webcamRef}
 								videoConstraints={videoConstraints}
 							/>
 
 							<Button onClick={createHook.capture} className={styles.buttonCapture}>
 								Tomar foto
 							</Button>
+
+							{createHook.imgCamara && (
+								<Image
+									src={createHook.imgCamara}
+									alt="Prueba"
+									width={createHook.webcamRef.current?.getCanvas()?.width}
+									height={createHook.webcamRef.current?.getCanvas()?.height}
+								/>
+							)}
 						</>
 					) : (
 						<div>
