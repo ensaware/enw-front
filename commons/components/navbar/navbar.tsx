@@ -80,7 +80,7 @@ const EnwNavBar = () => {
 								icon={HiOutlineQrcode}
 								label="Código QR"
 							>
-								<Sidebar.Item as={Link} href="#">
+								<Sidebar.Item as={Link} href="/enw/qr-code/create">
 									Crear Código QR
 								</Sidebar.Item>
 
