@@ -3,7 +3,7 @@
 }
 
 .navbar {
-	@apply bg-primary text-gray-900;
+	@apply bg-primary text-gray-900 fixed left-0 right-0;
 }
 
 .subnavbar {
@@ -11,7 +11,7 @@
 }
 
 .subnavbar div {
-	@apply bg-gray-900;
+	@apply bg-gray-900 mt-8;
 }
 
 .subnavbar a {

@@ -22,7 +22,7 @@ const EnwNavBar = () => {
 
 	return (
 		<>
-			<Navbar fluid className={styles.navbar}>
+			<Navbar fluid className={styles.navbar} style={{zIndex: 9999}}>
 				<Navbar.Brand>
 					<IoReorderThree className={styles.menu} onClick={onChangeSubNavbar} />
 					<span className="self-center whitespace-nowrap text-xl font-semibol">
@@ -71,7 +71,7 @@ const EnwNavBar = () => {
 									Registrar libro
 								</Sidebar.Item>
 
-								<Sidebar.Item as={Link} href="#">
+								<Sidebar.Item as={Link} href="/enw/library/view">
 									Ver libros registrados
 								</Sidebar.Item>
 							</Sidebar.Collapse>

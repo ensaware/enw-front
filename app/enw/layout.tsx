@@ -51,7 +51,9 @@ export default function EnwLayout({
 					<Toaster richColors />
 					<EnwNavBar />
 					<main className="md:ml-64 pl-5 pt-5 mr-4">
-						{children}
+						<section className="mt-16">
+							{children}
+						</section>
 					</main>
 				</>
 			}
