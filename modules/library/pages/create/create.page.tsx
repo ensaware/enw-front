@@ -20,7 +20,7 @@ const CreateLibrary = () => {
 
 	return (
 		<section>
-			{createHook.createFormik.isSubmitting && <EnwSpinner />}
+			{createHook.loading && <EnwSpinner />}
 
 			<Card className={styles.card}>
 				{createHook.library && (
@@ -29,34 +29,42 @@ const CreateLibrary = () => {
 					</Alert>
 				)}
 
-				<form
-					className={styles.form}
-					autoComplete="off"
-					onSubmit={createHook.createFormik.handleSubmit}
-				>
-					{isMobile ? (
-						<>
-							<Webcam
-								audio={false}
-								screenshotFormat="image/png"
-								ref={createHook.webcamRef}
-								videoConstraints={videoConstraints}
-							/>
-
-							<Button onClick={createHook.capture} className={styles.buttonCapture}>
-								Tomar foto
-							</Button>
-
-							{createHook.imgCamara && (
+				{isMobile ? (
+					<>
+						{createHook.imgCamara ? (
+							<>
 								<Image
 									src={createHook.imgCamara}
 									alt="Prueba"
 									width={createHook.webcamRef.current?.getCanvas()?.width}
 									height={createHook.webcamRef.current?.getCanvas()?.height}
 								/>
-							)}
-						</>
-					) : (
+
+								<Button className={styles.button} onClick={createHook.createMovil}>
+									Crear
+								</Button>
+							</>
+						): (
+							<>
+								<Webcam
+									audio={false}
+									screenshotFormat="image/png"
+									ref={createHook.webcamRef}
+									videoConstraints={videoConstraints}
+								/>
+
+								<Button onClick={createHook.capture} className={styles.buttonCapture}>
+									Tomar foto
+								</Button>
+							</>
+						)}
+					</>
+				): (
+					<form
+						className={styles.form}
+						autoComplete="off"
+						onSubmit={createHook.createFormik.handleSubmit}
+					>
 						<div>
 							<div className="mb-2 block">
 								<Label
@@ -74,12 +82,12 @@ const CreateLibrary = () => {
 								onChange={createHook.onChangeImage}
 							/>
 						</div>
-					)}
 
-					<Button className={styles.button} type="submit">
-						Crear
-					</Button>
-				</form>
+						<Button className={styles.button} type="submit">
+							Crear
+						</Button>
+					</form>
+				)}
 			</Card>
 		</section>
 	)

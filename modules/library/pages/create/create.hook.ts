@@ -13,11 +13,17 @@ const useCreateHook = () => {
 	const [imgCamara, setImgCamara] = useState<string | null | undefined>(null);
 	const [selectedImage, setSelectedImage] = useState<File | null>(null);
 	const [library, setLibrary] = useState<IViewLibrary | null>(null);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const capture = useCallback(() => {
 		const imageSrc = webcamRef.current?.getScreenshot();
 		setImgCamara(imageSrc);
-		console.log(imageSrc);
+
+		const imgFile = new File([
+			new Blob([imageSrc ? imageSrc : ""])
+		], "book.png");
+		setSelectedImage(imgFile);
+
 	}, [webcamRef, setImgCamara]);
 
 	const validateSchema = Yup.object().shape({
@@ -32,6 +38,8 @@ const useCreateHook = () => {
 		initialValues: initialValues,
 		validationSchema: validateSchema,
 		onSubmit: async (values: ICreate, action) => {
+			setLoading(true);
+
 			const formData = new FormData();
 			formData.append("image", selectedImage ? selectedImage : "");
 
@@ -39,6 +47,7 @@ const useCreateHook = () => {
 			setLibrary(data);
 
 			action.resetForm();
+			setLoading(false);
 		},
 	});
 
@@ -49,11 +58,30 @@ const useCreateHook = () => {
 		}
 	};
 
+	const createMovil = async() => {
+		try {
+			setLoading(true);
+			setImgCamara(null);
+
+			const formData = new FormData();
+			formData.append("image", selectedImage ? selectedImage : "");
+
+			const { data }: { data : IViewLibrary } = await create(formData);
+			setLibrary(data);
+
+			setLoading(false);
+		} catch {
+			setLoading(false);
+		}
+	}
+
 	return {
 		capture,
 		createFormik,
+		createMovil,
 		imgCamara,
 		library,
+		loading,
 		onChangeImage,
 		webcamRef
 	};
