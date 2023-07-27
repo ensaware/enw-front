@@ -49,7 +49,6 @@ const CreateLibrary = () => {
 								<Webcam
 									audio={false}
 									screenshotQuality={1}
-									screenshotFormat="image/png"
 									ref={createHook.webcamRef}
 									videoConstraints={videoConstraints}
 								/>
