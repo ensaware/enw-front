@@ -1,4 +1,4 @@
-import { IUser } from ".";
+import { IPagination, IUser } from ".";
 
 export interface ILibrary {
 	created: Date;
@@ -16,4 +16,8 @@ export interface IViewLibrary {
 	id: string;
 	library: ILibrary
 	user: IUser,
+}
+
+export interface ILibraryPagination extends IPagination {
+	items?: IViewLibrary[] | null
 }

@@ -1,0 +1,15 @@
+.table {
+	@apply rounded-none;
+}
+
+.thead {
+	@apply border-gray-700 bg-gray-500 text-white rounded-none;
+}
+
+.thead th {
+	@apply rounded-none;
+}
+
+.tr {
+	@apply border-gray-800 bg-gray-900;
+}

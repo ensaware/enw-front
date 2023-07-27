@@ -1,0 +1,11 @@
+.h2 {
+	@apply text-3xl md:text-4xl mb-2 flex justify-center;
+}
+
+.h2 svg {
+	@apply inline
+}
+
+.section {
+	@apply p-4 md:md:w-9/12 mx-auto;
+}
