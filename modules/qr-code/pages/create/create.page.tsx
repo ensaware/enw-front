@@ -26,7 +26,7 @@ const CreateQRCode = () => {
 						label="Mostrar logo de la Corporación Universitaria Americana"
 						checked={false}
 						color="success"
-						// onChange={()=>{}}
+						onChange={()=>{}}
 					/>
 
 					<Button className={styles.button} type="submit">
