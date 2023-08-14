@@ -20,14 +20,15 @@ const useViewHook = () => {
 				if(isMounted) {
 					setViewData(data);
 
-					const body: ITableBody[] = data.items?.map((item) => ({
+					const body: ITableBody[] = data.items?.map((item, index) => ({
+						id: item.id,
 						value: [
 							item.id.slice(0, 8),
-							`${item.library.title}${item.library.subtitle ? ` - ${item.library.subtitle}` : ""}`,
+							`${item.library.title} ${item.library.subtitle ?? ""}`,
 							item.library.isbn_13,
 							item.created,
 						],
-					})) || [];
+					})) ?? [];
 
 					setTable({
 						body: body,
@@ -46,7 +47,7 @@ const useViewHook = () => {
 	}, []);
 
 	const head = () => {
-		const data: ITableHead[] = ["Id", "Libro", "ISBN", "Fecha creación"].map(item => ({ value: item }));
+		const data: ITableHead[] = ["Id", "Libro", "ISBN", "Fecha creación"].map((item, index) => ({ id: `library-${index}`, value: item }));
 		return data;
 	}
 

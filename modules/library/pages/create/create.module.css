@@ -13,7 +13,3 @@
 .button {
 	@apply bg-secondary;
 }
-
-.buttonCapture {
-	@apply bg-primary;
-}

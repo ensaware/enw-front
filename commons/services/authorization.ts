@@ -12,8 +12,6 @@ export const login = (provider: string) => {
 		}
 	);
 
-	url = `${url}`;
-
 	window.location.href = url;
 };
 

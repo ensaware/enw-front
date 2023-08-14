@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { OAuthFacade } from "../../oauth.facade";
 import { IToken } from "@/commons/entities";
 
