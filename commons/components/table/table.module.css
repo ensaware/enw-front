@@ -1,15 +1,15 @@
-.table {
-	@apply rounded-none;
-}
-
-.thead {
-	@apply border-gray-700 bg-gray-500 text-white rounded-none;
-}
-
-.thead th {
-	@apply rounded-none;
+.th {
+	@apply border-gray-700 bg-gray-700 text-white rounded-none !important;
 }
 
 .tr {
 	@apply border-gray-800 bg-gray-900;
+}
+
+.tr:nth-child(2n) {
+	@apply bg-gray-700;
+}
+
+.tr td {
+	@apply rounded-none !important;
 }

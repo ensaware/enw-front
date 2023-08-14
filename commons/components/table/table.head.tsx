@@ -6,8 +6,8 @@ import styles from "./table.module.css"
 const EnwTableHead = ( { head } : { head : ITableHead[] | null | undefined }) => {
 	return (
 		<Table.Head>
-			{head?.map((item, index) => (
-				<Table.HeadCell key={index} className={styles.thead}>
+			{head?.map(item => (
+				<Table.HeadCell key={item.id} className={styles.th}>
 					{item.value}
 				</Table.HeadCell>
 			))}

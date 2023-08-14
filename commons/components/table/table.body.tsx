@@ -6,10 +6,10 @@ import styles from "./table.module.css"
 const EnwTableBoy = ({ body } : { body: ITableBody[] | null | undefined }) => {
 	return (
 		<Table.Body className="divide-y">
-			{body?.map((item, indexItem) => (
-				<Table.Row key={indexItem + "-row"} className={styles.tr}>
-					{item.value.map((row, indexRow) => (
-						<Table.Cell key={indexRow + "-cell"}>
+			{body?.map(item => (
+				<Table.Row key={item.id + "-row"} className={styles.tr}>
+					{item.value.map((row, index) => (
+						<Table.Cell key={`${item.id}-cell-${index}`}>
 							{row}
 						</Table.Cell>
 					))}
