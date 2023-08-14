@@ -8,7 +8,15 @@ export const me = async() => {
         version: 'v1'
     });
 
-    url = `${url}`;
-
     return await axios.get<IUser>(url);
+}
+
+export const updateCareer = async(career_id: string) => {
+	let url: string = urlBuilder.services(environment.api.services.user, {
+        version: 'v1'
+    });
+
+	return await axios.patch<IUser>(url, {
+		career_id: career_id
+	});
 }

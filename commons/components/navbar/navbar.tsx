@@ -44,7 +44,7 @@ const EnwNavBar = () => {
 							</span>
 						</Dropdown.Header>
 
-						<Dropdown.Item>
+						<Dropdown.Item as={Link} href="/enw/me">
 							<HiOutlineUser />
 							&nbsp; Perfil
 						</Dropdown.Item>

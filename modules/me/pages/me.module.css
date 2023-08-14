@@ -1,0 +1,19 @@
+.card {
+	@apply md:w-9/12 md:mx-auto;
+}
+
+.form {
+	@apply flex flex-col gap-4;
+}
+
+.form div {
+	@apply mb-2 block;
+}
+
+.button {
+	@apply bg-secondary align-middle;
+}
+
+.button span svg {
+	@apply text-xl;
+}
